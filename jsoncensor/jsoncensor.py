@@ -24,19 +24,19 @@ class JsonCensor(object):
 
             #type不一致
             if type(_standard) != type(_suspect):
-                return {"JSONcensor_msg":"Value type not equal"}
+                return "TypeError:" + str(_suspect) + "|Should Be:" + type(_standard).__name__
 
             #字典情况
             if type(_standard) == type(_suspect) and type(_standard) is dict:
                 #1,Key 数目检查
                 if len(_standard.keys()) != len(_suspect.keys()):
-                    return {"JSONcensor_msg":"Key number is not equal."}
+                    return "KeyNumberError:" + str(list(_suspect.keys())) + "Should Be:" + str(list(_standard.keys()))
                 
                 #2, Key 名字检查,需要一致
                 _standard_keys = _standard.keys()
                 _suspect_keys = _suspect.keys()
                 if _standard_keys != _suspect_keys:
-                    return {"JSONcensor_msg": "Key name is not the same."}
+                    return "KeyNameError:" + str(list(_suspect.keys())) + "Should Be:" + str(list(_standard.keys()))
                 
                 #3, 将Value加入到Queue中
                 for key in _standard_keys:

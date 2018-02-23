@@ -1,6 +1,6 @@
 from flask import Flask
 from flask import request, jsonify
-from jsoncensor import JsonCensor
+from ..jsoncensor import JsonCensor
 
 app = Flask(__name__)
 
@@ -14,9 +14,9 @@ def perfect():
             "email":""
         }
         jc = JsonCensor(standard, request.get_json())
-        check_msg = jc.check()
-        if check_msg is not True:
-            return jsonify(check_msg)
+        result = jc.check()
+        if result is not True:
+            return jsonify({"msg":result})
         # End Check
 
         # Your Code Here

@@ -13,9 +13,9 @@ async def test(request):
         "email":""
     }
     jc = JsonCensor(standard, await request.json())
-    check_msg = jc.check()
-    if check_msg is not True:
-        return json_response(check_msg)
+    result = jc.check()
+    if result is not True:
+        return json_response({"msg":result})
     # End Check
 
     # Your Code Here
