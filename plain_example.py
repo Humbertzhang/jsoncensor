@@ -117,10 +117,10 @@ jc1 = JsonChecker(standard, perfect_suspect)
 assert jc1.check() == True
 
 jc2 = JsonChecker(standard, keynumber_suspect)
-assert jc2.check() == {"JSONChecker_msg":"Key number is not equal."}
+assert jc2.check() == {"JSONchecker_msg":"Key number is not equal."}
 
 jc3 = JsonChecker(standard, keyname_suspect)
 assert jc3.check() == {"JSONchecker_msg": "Key name is not the same."}
 
 jc4 = JsonChecker(standard, valtype_suspect)
-assert jc4.check() == {"JSONChecker_msg":"Value type not equal"}
+assert jc4.check() == {"JSONchecker_msg":"Value type not equal"}

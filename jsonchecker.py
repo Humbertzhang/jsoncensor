@@ -2,7 +2,7 @@ from queue import Queue
 
 QUEUE_MAXSIZE = 1024
 
-__all__ = ['JsonChecker', 'ArgException']
+__all__ = ['JsonChecker', 'ArgNotDictException']
 
 class JsonChecker(object):
     
