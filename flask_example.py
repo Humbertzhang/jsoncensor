@@ -1,6 +1,6 @@
 from flask import Flask
 from flask import request, jsonify
-from jsonchecker import JsonChecker
+from jsoncensor import JsonCensor
 
 app = Flask(__name__)
 
@@ -13,7 +13,7 @@ def perfect():
             "password":"", 
             "email":""
         }
-        jc = JsonChecker(standard, request.get_json())
+        jc = JsonCensor(standard, request.get_json())
         check_msg = jc.check()
         if check_msg is not True:
             return jsonify(check_msg)

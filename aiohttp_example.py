@@ -1,7 +1,7 @@
 from aiohttp import web
 from aiohttp.web import json_response
 import asyncio
-from jsonchecker import JsonChecker
+from jsoncensor import JsonCensor
 
 app = web.Application()
 
@@ -12,7 +12,7 @@ async def test(request):
         "password":"",
         "email":""
     }
-    jc = JsonChecker(standard, await request.json())
+    jc = JsonCensor(standard, await request.json())
     check_msg = jc.check()
     if check_msg is not True:
         return json_response(check_msg)

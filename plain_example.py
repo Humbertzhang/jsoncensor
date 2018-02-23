@@ -1,4 +1,4 @@
-from jsonchecker import JsonChecker
+from jsoncensor import JsonCensor
 
 standard = {
     "k1":"v1",
@@ -113,14 +113,14 @@ valtype_suspect = {
     }
 }
 
-jc1 = JsonChecker(standard, perfect_suspect)
+jc1 = JsonCensor(standard, perfect_suspect)
 assert jc1.check() == True
 
-jc2 = JsonChecker(standard, keynumber_suspect)
-assert jc2.check() == {"JSONchecker_msg":"Key number is not equal."}
+jc2 = JsonCensor(standard, keynumber_suspect)
+assert jc2.check() == {"JSONcensor_msg":"Key number is not equal."}
 
-jc3 = JsonChecker(standard, keyname_suspect)
-assert jc3.check() == {"JSONchecker_msg": "Key name is not the same."}
+jc3 = JsonCensor(standard, keyname_suspect)
+assert jc3.check() == {"JSONcensor_msg": "Key name is not the same."}
 
-jc4 = JsonChecker(standard, valtype_suspect)
-assert jc4.check() == {"JSONchecker_msg":"Value type not equal"}
+jc4 = JsonCensor(standard, valtype_suspect)
+assert jc4.check() == {"JSONcensor_msg":"Value type not equal"}
