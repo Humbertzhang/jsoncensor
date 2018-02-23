@@ -7,6 +7,7 @@ __all__ = ['JsonChecker', 'ArgException']
 
 class JsonChecker(object):
     
+    #if you want a infinite queuesize, set queuesize with 0
     def __init__(self, standard, suspect, queuesize = QUEUE_MAXSIZE):
         self.checkqueue = Queue(queuesize)
         self.standard = standard
@@ -24,13 +25,13 @@ class JsonChecker(object):
 
             #type不一致
             if type(_standard) != type(_suspect):
-                return {"JSONChecker_msg":"Value type not equal"}
+                return {"JSONchecker_msg":"Value type not equal"}
 
             #字典情况
             if type(_standard) == type(_suspect) and type(_standard) is dict:
                 #1,Key 数目检查
                 if len(_standard.keys()) != len(_suspect.keys()):
-                    return {"JSONChecker_msg":"Key number is not equal."}
+                    return {"JSONchecker_msg":"Key number is not equal."}
                 
                 #2, Key 名字检查,需要一致
                 _standard_keys = _standard.keys()
