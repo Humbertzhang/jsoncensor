@@ -1,10 +1,11 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
-    name = 'json-checker',
-    version = '0.0.1',
+    name = 'jsoncensor',
+    version = '0.0.5',
     description = 'Check json data in your python web service.',
-    url = 'https://github.com/Humbertzhang/jsonchecker',
+    url = 'https://github.com/Humbertzhang/jsoncensor',
     author = 'HumbertZhang',
-    author_email = 'zhangke980623@icloud.com'
+    author_email = 'zhangke980623@icloud.com',
+    packages = find_packages()
 )
