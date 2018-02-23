@@ -1,4 +1,3 @@
-# key name应一致，value若不为dict应一致，若未dict应递归
 from queue import Queue
 
 QUEUE_MAXSIZE = 1024
