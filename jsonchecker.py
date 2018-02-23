@@ -6,6 +6,7 @@ QUEUE_MAXSIZE = 1024
 __all__ = ['JsonChecker', 'ArgException']
 
 class JsonChecker(object):
+    
     def __init__(self, standard, suspect, queuesize = QUEUE_MAXSIZE):
         self.checkqueue = Queue(queuesize)
         self.standard = standard
@@ -13,7 +14,7 @@ class JsonChecker(object):
 
     def check(self):
         if type(self.standard) is not dict or type(self.suspect) is not dict:
-            raise ArgTypeException
+            raise ArgNotDictException
 
         #初始化队列，将被检查对象加入队列中
         self.checkqueue.put((self.standard, self.suspect))
@@ -21,7 +22,7 @@ class JsonChecker(object):
         while not self.checkqueue.empty():
             _standard, _suspect =  self.checkqueue.get()
 
-            #非字典情况，需要type一致
+            #type不一致
             if type(_standard) != type(_suspect):
                 return {"JSONChecker_msg":"Value type not equal"}
 
@@ -43,6 +44,6 @@ class JsonChecker(object):
             
         return True
 
-class ArgTypeException(Exception):
+class ArgNotDictException(Exception):
     'Exception raised when args is illegal'
     pass
