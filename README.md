@@ -7,9 +7,37 @@ Check json data in your python web service.
 2,检查key是否一致 <br>
 3,检查value的type是否一致, 若value为一个对象，则递归地检查它的key number，Key name, value type. <br>
 
-#Usage
+# Usage
 创建一个标准json数据的字典，把它和待检查字典作为初始化JsonCensor对象的参数传入 <br>
-调用JsonCensor对象的check方法，若检查通过返回True, 否则返回字符串msg. <br>
+调用JsonCensor对象的check方法. <br>
+
+```Python
+from jsoncensor import JsonCensor
+
+standard = {...}
+suspect = {...}
+
+jc = JsonCensor(standard, suspect)
+ret = jc.check()
+if ret['statu'] == True:
+    print("ok")
+else:
+    print(ret)
+
+```
+
+返回结构体:
+
+```
+{
+    "statu": True Or False,
+    "error": string 若有错误为错误类型，否则为None,
+    "error_item": string 错误对象的字符串,
+    "should_be": string 错误对象应有的状态
+}
+```
+
+# 示例
 
 `plain_example`
 
@@ -146,15 +174,16 @@ print(jc4.check() == True)
 print(jc4.check())
 ```
 python3 plain_example.py 结果输出
+
 ```
 True
-True
+{'statu': True, 'error': None, 'error_item': None, 'should_be': None}
 False
-KeyNumberError:['k3', 'k4', 'k5']Should Be:['k1', 'k2', 'k3', 'k4', 'k5']
+{'statu': False, 'error': 'KeyNumberError', 'error_item': 'k3, k4, k5', 'should_be': 'k1, k2, k3, k4, k5'}
 False
-KeyNameError:['fuckccnu']Should Be:['k5_1_1_1']
+{'statu': False, 'error': 'KeyNameError', 'error_item': 'fuckccnu', 'should_be': 'k5_1_1_1'}
 False
-TypeError:['test']|Should Be:str
+{'statu': False, 'error': 'TypeError', 'error_item': "['test']", 'should_be': 'str'}
 ```
 
 关于flask或aiohttp的例子请见example
