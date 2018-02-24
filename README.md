@@ -34,7 +34,7 @@ else:
 {
     "statu": True Or False,
     "error": string 若有错误为错误类型，否则为None,
-    "error_item": string 错误对象的字符串,
+    "error_indicator": string 错误对象的字符串,
     "should_be": string 错误对象应有的状态
 }
 ```
@@ -179,13 +179,13 @@ python3 plain_example.py 结果输出
 
 ```
 True
-{'statu': True, 'error': None, 'error_item': None, 'should_be': None}
+{'statu': True, 'error': None, 'error_indicator': None, 'should_be': None}
 False
-{'statu': False, 'error': 'KeyNumberError', 'error_item': 'k3, k4, k5', 'should_be': 'k1, k2, k3, k4, k5'}
+{'statu': False, 'error': 'KeyNumberError', 'error_indicator': 'k3, k4, k5', 'should_be': 'k1, k2, k3, k4, k5'}
 False
-{'statu': False, 'error': 'KeyNameError', 'error_item': 'fuckccnu', 'should_be': 'k5_1_1_1'}
+{'statu': False, 'error': 'KeyNameError', 'error_indicator': 'fuckccnu', 'should_be': 'k5_1_1_1'}
 False
-{'statu': False, 'error': 'TypeError', 'error_item': "['test']", 'should_be': 'str'}
+{'statu': False, 'error': 'TypeError', 'error_indicator': "['test']", 'should_be': 'str'}
 ```
 
 关于flask或aiohttp的例子请见example
