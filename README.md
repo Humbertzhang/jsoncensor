@@ -8,6 +8,8 @@ Check json data in your python web service.
 3,检查value的type是否一致, 若value为一个对象，则递归地检查它的key number，Key name, value type. <br>
 
 # Usage
+Support both python2.7 and python3 <br>
+`pip install jsoncensor`
 创建一个标准json数据的字典，把它和待检查字典作为初始化JsonCensor对象的参数传入 <br>
 调用JsonCensor对象的check方法. <br>
 
