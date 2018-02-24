@@ -9,7 +9,7 @@ The struct will be return
 {
     "statu":True or False,
     "error":"",
-    "error_item":"",
+    "error_indicator":"",
     "should_be":""
 }
 '''
@@ -22,25 +22,25 @@ class JsonCensor(object):
         self.standard = standard
         self.suspect = suspect
         self.ret = {
-                    "statu":None,
-                    "error":None,
-                    "error_item":None,
-                    "should_be":None
-                }
+                        "statu":None,
+                        "error":None,
+                        "error_indicator":None,
+                        "should_be":None
+                   }
 
     def check(self):
         if type(self.standard) is not dict or type(self.suspect) is not dict:
             raise ArgNotDictException
 
         #初始化队列，将被检查对象加入队列中
-        self.checkqueue.put((self.standard, self.suspect))
+        self.checkqueue.put(("", self.standard, self.suspect))
 
         while not self.checkqueue.empty():
-            _standard, _suspect =  self.checkqueue.get()
+            key, _standard, _suspect =  self.checkqueue.get()
 
             #type不一致
             if type(_standard) != type(_suspect):
-                self._set_ret(False, "TypeError", str(_suspect), str(type(_standard).__name__))
+                self._set_ret(False, "TypeError", str('"' + key + '"') + ":" + ('"' + str(_suspect) + '"'), str(type(_standard).__name__))
                 return self.ret
 
             #字典情况
@@ -64,7 +64,7 @@ class JsonCensor(object):
 
                 #3, 将Value加入到Queue中
                 for key in _standard_keys:
-                    self.checkqueue.put( (_standard[key], _suspect[key]) )
+                    self.checkqueue.put( (str(key), _standard[key], _suspect[key]) )
         
         #Set True return
         self._set_ret(True)
@@ -73,7 +73,7 @@ class JsonCensor(object):
     def _set_ret(self, statu, error = None, error_item = None, should_be = None):
         self.ret['statu'] = statu
         self.ret['error'] = error
-        self.ret['error_item'] = error_item
+        self.ret['error_indicator'] = error_item
         self.ret['should_be'] = should_be
         return self.ret
 
