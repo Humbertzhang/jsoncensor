@@ -1,6 +1,6 @@
 from flask import Flask
 from flask import request, jsonify
-from ..jsoncensor import JsonCensor
+from jsoncensor import JsonCensor
 
 app = Flask(__name__)
 
@@ -15,8 +15,8 @@ def perfect():
         }
         jc = JsonCensor(standard, request.get_json())
         result = jc.check()
-        if result is not True:
-            return jsonify({"msg":result})
+        if result['statu'] is not True:
+            return jsonify({"JSON_msg":result})
         # End Check
 
         # Your Code Here
