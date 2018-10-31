@@ -44,7 +44,7 @@ class JsonCensor(object):
                 return self.ret
 
             #字典情况
-            if type(_standard) == type(_suspect) and type(_standard) is dict:
+            elif type(_standard) == type(_suspect) and type(_standard) is dict:
                 #1,Key 数目检查
                 if len(_standard.keys()) != len(_suspect.keys()):
                     self._set_ret(False, "KeyNumberError", str(', '.join(_suspect.keys())), str(', '.join(_standard.keys())))
@@ -65,6 +65,14 @@ class JsonCensor(object):
                 #3, 将Value加入到Queue中
                 for key in _standard_keys:
                     self.checkqueue.put( (str(key), _standard[key], _suspect[key]) )
+
+            # 列表情况
+            elif type(_standard) == type(_suspect) and type(_standard) is list:
+                if len(_standard) is 0 and len(_suspect) is 0:
+                    continue
+                else:
+                    self.checkqueue.put( ("list", _standard[0], _suspect[0]) )
+
         
         #Set True return
         self._set_ret(True)
